@@ -7,7 +7,7 @@ from typing import Any, Dict, Optional, Set
 
 from fastapi import WebSocket
 
-from .models import Peer
+from core.models import Peer
 
 
 logger = logging.getLogger(__name__)

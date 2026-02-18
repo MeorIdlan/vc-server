@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
-from .api.http import router as http_router
-from .api.ws import router as ws_router
+from api.http import router as http_router
+from api.ws import router as ws_router
 
 
 def create_app() -> FastAPI:

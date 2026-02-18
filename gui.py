@@ -8,8 +8,8 @@ from typing import Optional
 
 import uvicorn
 
-from .app import app as fastapi_app
-from .logging_config import setup_logging
+from app import app as fastapi_app
+from logging_config import setup_logging
 
 
 logger = logging.getLogger(__name__)
@@ -70,9 +70,9 @@ def main(argv: list[str] | None = None) -> int:
     effective_level = (args.log_level or "info").lower()
 
     try:
-        from .ui.app import create_qt_app
-        from .ui.logging import LogBridge, install_qt_log_handler
-        from .ui.windows import LogWindow
+        from ui.app import create_qt_app
+        from ui.logging import LogBridge, install_qt_log_handler
+        from ui.windows import LogWindow
     except Exception as e:
         print(f"Failed to import UI dependencies: {e}")
         print("Install server deps with: pip install -r server/requirements.txt")

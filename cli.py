@@ -2,13 +2,28 @@ from __future__ import annotations
 
 import argparse
 
+import os
+
 import uvicorn
 from fastapi import FastAPI
 
-from .logging_config import setup_logging
+from logging_config import setup_logging
+
+
+def _load_dotenv() -> None:
+    try:
+        from dotenv import load_dotenv  # type: ignore
+    except Exception:
+        return
+    try:
+        load_dotenv(override=False)
+    except Exception:
+        return
 
 
 def run(app: FastAPI) -> None:
+    _load_dotenv()
+
     parser = argparse.ArgumentParser(description="Tiny WebRTC signaling server")
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8765)

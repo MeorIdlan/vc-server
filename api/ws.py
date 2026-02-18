@@ -7,9 +7,9 @@ import time
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
-from .. import config
-from ..core.models import Peer, new_peer_id
-from ..core.state import (
+import config
+from core.models import Peer, new_peer_id
+from core.state import (
     PEERS,
     ROOMS,
     STATE_LOCK,

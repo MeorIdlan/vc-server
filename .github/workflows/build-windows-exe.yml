@@ -49,25 +49,25 @@ jobs:
       - name: Build EXE (PyInstaller)
         working-directory: "${{ github.workspace }}"
         run: |
-          python -m PyInstaller --noconfirm --clean --onefile --windowed --name vc-app-server build_entry.py
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name vc-server build_entry.py
 
       - name: Package artifact
         shell: pwsh
         working-directory: "${{ github.workspace }}"
         run: |
-          $exe = "dist\vc-app-server.exe"
+          $exe = "dist\vc-server.exe"
           if (-not (Test-Path $exe)) { throw "Expected EXE not found at $exe" }
-          Compress-Archive -Path $exe -DestinationPath vc-app-server-windows.zip -Force
+          Compress-Archive -Path $exe -DestinationPath vc-server-windows.zip -Force
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: vc-app-server-windows
+          name: vc-server-windows
           path: |
-            ${{ github.workspace }}/vc-app-server-windows.zip
+            ${{ github.workspace }}/vc-server-windows.zip
 
       - name: Release (tags only)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ github.workspace }}/vc-app-server-windows.zip
+          files: ${{ github.workspace }}/vc-server-windows.zip
